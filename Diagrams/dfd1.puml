@@ -1,0 +1,32 @@
+@startuml
+top to bottom direction
+
+actor "User" as User
+actor "Administrator" as Admin
+actor "Sensors" as Sensors
+actor "Actuators" as Actuators
+actor "AI Model" as AI
+
+rectangle "AI-Driven Hydroponic System" {
+    rectangle "1. Sensor Data Collection" as P1
+    rectangle "2. Data Processing & Storage" as P2
+    rectangle "3. AI-Based Decision Making" as P3
+    rectangle "4. System Control & Automation" as P4
+    rectangle "5. User Interface & Alerts" as P5
+}
+
+Sensors -down-> P1 : "Environmental Data"
+P1 -down-> P2 : "Store & Preprocess Data"
+P2 -down-> P3 : "Analyze Trends"
+AI -down-> P3 : "Predict Growth & Needs"
+P3 -down-> P4 : "Trigger Control Actions"
+P4 -down-> Actuators : "Adjust Nutrients & Irrigation"
+
+P2 -left-> P5 : "Show Data on Dashboard"
+P3 -left-> P5 : "Display AI Insights"
+P4 -left-> P5 : "Send Alerts"
+
+User -down-> P5 : "View & Adjust Settings"
+Admin -down-> P5 : "Manage Configurations"
+
+@enduml

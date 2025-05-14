@@ -1,0 +1,21 @@
+@startuml
+start
+:User Logs In;
+:View Dashboard;
+if (Sensor Data Available?) then (Yes)
+    :Fetch Sensor Data;
+    :Analyze Data with AI Model;
+    if (Critical Condition?) then (Yes)
+        :Send Alerts;
+    else (No)
+        :Update Dashboard;
+    endif
+else (No)
+    :Display No Data Message;
+endif
+:User Adjusts Settings?;
+if (Yes) then
+    :Update Parameters;
+endif
+stop
+@enduml

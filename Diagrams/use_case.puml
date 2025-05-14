@@ -1,0 +1,53 @@
+@startuml
+left to right direction
+
+actor "User" as User
+actor "System Administrator" as Admin
+actor "Sensors" as Sensors
+actor "Actuators" as Actuators
+actor "AI Model" as AI
+
+rectangle "AI-Driven Hydroponic System" {
+    
+    package "Monitoring & Control" {
+        usecase "Monitor Environmental Data" as UC1
+        usecase "Control Nutrient Supply" as UC2
+        usecase "Control Irrigation System" as UC3
+        usecase "Receive Alerts & Notifications" as UC4
+    }
+
+    package "User Interaction" {
+        usecase "Access Data Dashboard" as UC5
+        usecase "Remote Access and Control" as UC9
+    }
+
+    package "AI & Automation" {
+        usecase "Predict Plant Growth" as UC6
+        usecase "Log and Analyze Historical Data" as UC8
+    }
+
+    package "System Configuration" {
+        usecase "Adjust System Settings" as UC7
+        usecase "Integrate Additional Sensors/Actuators" as UC10
+    }
+}
+
+Sensors -down-> UC1 : "Send Data"
+Actuators -down-> UC2 : "Adjust Nutrient Flow"
+Actuators -down-> UC3 : "Regulate Irrigation"
+AI -down-> UC6 : "Make Predictions"
+
+User -down-> UC1 : "View Data"
+User -down-> UC2 : "Modify Nutrient Levels"
+User -down-> UC3 : "Control Irrigation"
+User -down-> UC4 : "Receive Alerts"
+User -down-> UC5 : "View Graphs & Reports"
+User -down-> UC7 : "Modify Settings"
+User -down-> UC8 : "Analyze Trends"
+User -down-> UC9 : "Remotely Manage System"
+User -down-> UC10 : "Expand System"
+
+Admin -down-> UC7 : "Configure System Parameters"
+Admin -down-> UC9 : "Grant Remote Access"
+Admin -down-> UC10 : "Add New Hardware"
+@enduml

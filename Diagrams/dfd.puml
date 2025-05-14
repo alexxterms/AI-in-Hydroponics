@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+
+actor "User" as User
+actor "Administrator" as Admin
+actor "Sensors" as Sensors
+actor "Actuators" as Actuators
+actor "AI Model" as AI
+
+rectangle "AI-Driven Hydroponic System" as System {
+}
+
+User -down-> System : "Monitor & Control"
+Admin -down-> System : "Configure & Manage"
+Sensors -down-> System : "Send Real-Time Data"
+AI -down-> System : "Predict Growth & Adjustments"
+System -down-> Actuators : "Control Irrigation & Nutrients"
+
+@enduml
