@@ -15,6 +15,10 @@ def get_sensor_data():
     ph_raw = read_adc(0)
     ldr_raw = read_adc(1)
     gas_raw = read_adc(2)
+
+    brightness = (ldr_raw / 255.0) * 100
+    print(f"Light Intensity: {brightness:.2f}%")
+
     
     return {
         "pH_raw": ph_raw,
