@@ -1,34 +1,20 @@
-import smbus
+import grovepi
 import time
 
-bus = smbus.SMBus(1)  # I2C bus 1
-address = 0x48        # Default address for PCF8591
+# Port configuration
+ph_pin = 0
+ldr_pin = 1
+gas_pin = 2
+dht_pin = 4
 
-def read_adc(channel):
-    if channel < 0 or channel > 3:
-        raise ValueError("Channel must be 0-3")
-    bus.write_byte(address, 0x40 | channel)
-    bus.read_byte(address)  # Dummy read
-    return bus.read_byte(address)  # Real data (0–255)
+while True:
+    try:
+        ph_raw = grovepi.analogRead(ph_pin)
+        ldr_raw = grovepi.analogRead(ldr_pin)
+        gas_raw = grovepi.analogRead(gas_pin)
+        [temp, hum] = grovepi.dht(dht_pin, 0)
 
-def get_sensor_data():
-    ph_raw = read_adc(0)
-    ldr_raw = read_adc(1)
-    gas_raw = read_adc(2)
-
-    brightness = (ldr_raw / 255.0) * 100
-    print(f"Light Intensity: {brightness:.2f}%")
-
-    
-    return {
-        "pH_raw": ph_raw,
-        "ldr_raw": ldr_raw,
-        "gas_raw": gas_raw
-    }
-
-# Example usage
-if __name__ == "__main__":
-    while True:
-        data = get_sensor_data()
-        print(data)
+        print(f"pH: {ph_raw}, LDR: {ldr_raw}, Gas: {gas_raw}, Temp: {temp}, Humidity: {hum}")
         time.sleep(1)
+    except Exception as e:
+        print("Error:", e)
